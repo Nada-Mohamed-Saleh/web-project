@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f8f2e0;
+    padding: 30px;
+}
+
+.checkout-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 150px auto;
+}
+
+h2, h3 {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+
+.btn {
+    margin-top: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #45a049;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.summary-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total-row {
+    font-weight: bold;
+    font-size: 18px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+input::placeholder {
+    color: #999;      
+    padding-left: 5px; 
+}
+
+input {
+    padding: 10px;
+}
+#nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;  
+    justify-content: space-between;
+   
+}
+@font-face {
+    font-family:"MyFont" ;
+    src: url(PerfectoCalligraphy.ttf);
+}
+.nav-center{
+    font-size: 70px;
+    font-family:'MyFont';
+}
+.nav-left{
+    margin-left: 15px;
+}
+.nav-right{
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+.sidebar{
+position: fixed;
+margin-top: 0;
+top:0;
+left: 0;
+height: 100%;
+width: 250px;
+z-index: 999;
+background-color:whitesmoke;
+box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
+display: none;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+gap: 45px;
+font-size: 20px;
+list-style-type: none;
+cursor: pointer;
+border-radius: 2px;
+}
+.sidebar li{
+    width: 100%;
+
+}
+.sidebar a{
+    width: 100%;
+    color: black;
+    text-decoration: none;
+    font-weight: bolder;
+    font-family:'Garamond';
+    
+}
+.sidebar a:hover{
+ color:rgb(200, 161, 109);
+ font-size: 24px;
+}
+#cartcount{
+position:relative;
+top: -20px;
+right: 15px;
+background-color: wheat;
+color:black;
+padding: 2px 4px;
+border-radius: 50%;
+font-size: 15px;
+}
+.cart{
+position: fixed;
+top: 0;
+right: 0;
+width: 300px;
+height: 100%;
+background-color: whitesmoke;
+box-shadow:-10px 0 10px rgba(0, 0, 0, 0.2); 
+padding: 1rem;
+z-index: 999;
+border-radius: 2px;
+visibility: hidden;
+overflow-y: auto;
+}
+.cart-title{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ border-bottom:2px solid rgb(225, 218, 203);
+ padding-bottom:1rem;
+}
+.cart-title h3{
+ color: black;
+ font-family: garamond;
+ font-size: 30px;
+}
+.close-btn{
+    cursor: pointer;
+}
+.cart-total{
+font-weight: bolder;
+font-size: 25px;
+text-align: right;
+font-family: garamond;
+border-top: 2px solid rgb(225, 218, 203);
+padding-top: 1rem;
+margin-top: 1rem;
+}
+.q-btn :hover{
+    opacity: 0.95;
+}
+.checkout-button:hover{
+    opacity: 0.95;
+}
+.checkout-button{
+ padding: 8px 100px;
+ background-color: #ff5e78;
+ color: whitesmoke;
+ text-align: center;
+ border-radius: 5px;
+ cursor: pointer;
+ margin-top: 8px;
+ font-size: 18px;
+ font-family: garamond;
+ font-weight: bolder;
+ text-decoration: none;
+ display: flex;
+ justify-content: center;
+ margin-bottom: 60px;
+}
+.trash-btn{
+ margin-left: 100px;
+cursor: pointer;
+
+}
+.q-btn{
+ background-color: #ff5e78;
+ cursor: pointer;
+ border: none;
+ padding: 5px 10px;
+ border-radius: 8px;
+ color: white;
+}
+.cart-item{
+list-style-type: none;
+}
+#footer{
+    margin-top: 90px;
+    margin-bottom: 30px;
+    
+}
+.end{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-size: 20px;
+}
+.message{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}  
+#searchBox{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 60px;
+background-color: whitesmoke;
+display: flex;
+align-items: center;
+padding: 20px;
+z-index: 999;
+box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
+visibility: hidden;
+}
+#searchInput{
+ border-radius: 50px;
+ height: 40px;
+ width: 350px;
+ margin: auto;
+}
+#close-search{
+ cursor: pointer;
+}
+</style>
+</head>
+<body>
+<header id="nav">
+<div class="nav-left">
+<div>
+  <ul class="sidebar">
+ <li onclick=closeMenu()><img src="pics/multiplication-sign_85711272.png" width="65"></li>
+ <li><a href="index.html">Home</a></li>
+ <li><a href="necklaces.html">Necklaces Collection</a></li>
+ <li><a href="bracelets.html">Bracelets Collection</a></li>
+ <li><a href="cardHolders.html">CardHolders Collection</a></li>
+ <li><a href="rings.html">Rings Collection</a></li>
+ <li><a href="earrings.html">Earrings Collection</a></li>
+ <li><a href="belts.html">Belts Collection</a></li>
+ <li><a href="login.html">Login</a></li>
+ </ul>
+</div>
+<img onclick=openMenu() style="cursor: pointer;" src="pics/menu-bar_10080458.png" width="60"> 
+<img src="pics/search.png" width="60" style="cursor: pointer;"  onclick=openSearch()>
+<div id="searchBox">
+ <img src="pics/multiplication-sign_85711272.png" width="65" id="close-search" onclick=closeSearch()>
+ <input type="text" id="searchInput" placeholder="Search Your Product...">
+</div>
+</div>
+<div class="nav-center">Jewels</div>
+<div class="nav-right">
+<a href="login.html"><img src="pics/person_14362141.png" width="55"></a>
+<img onclick=opencart() style="cursor: pointer;"  src="pics/cart.png" width="64">
+<span id="cartcount">0</span>
+</div>
+</header>
+<div class="cart" id="cart">
+ <div class="cart-title">
+    <h3>My Cart</h3>
+    <img src="pics/multiplication-sign_85711272.png" width="65" class="close-btn"  onclick=closecart()>
+ </div>
+ <ul id="cart-items">
+
+ </ul>
+ <div class="cart-total">Total: LE <span id="total-price">0</span> EGP</div>
+ <br>
+ <div><a class="checkout-button" href="checkout.html"> Check Out</a></div>
+</div>
+
+<div class="checkout-container">
+
+    <h3>Checkout</h3>
+
+    <!-- Billing Form -->
+    <form id="checkoutForm">
+
+        <h3>Billing Details</h3>
+
+        <label>first Name</label>
+        <input type="text" id="name" required><br>
+
+         <label>last Name</label>
+        <input type="text" id="name" required><br>
+
+        <label>Email</label>
+        <input type="email" id="email" required><br>
+
+        <label>Address</label>
+        <input type="text" id="address" required><br>
+        
+        <label>Phone Number</label>
+<input type="tel" id="phone" placeholder="e.g. 01012345678" required>
+        <label>Governorate</label>
+<select id="governorate" required>
+    <option value="" disabled selected>Select governorate</option>
+    <option>Cairo</option>
+    <option>Giza</option>
+    <option>Alexandria</option>
+    <option>Qalyubia</option>
+    <option>Sharqia</option>
+    <option>Gharbia</option>
+    <option>Fayoum</option>
+    <option>Ismailia</option>
+    <option>Beni Suef</option>
+    <option>Minya</option>
+    <option>Assiut</option>
+    <option>Sohag</option>
+    <option>Qena</option>
+    <option>Luxor</option>
+    <option>Aswan</option>
+    <option>Red Sea</option>
+    <option>South Sinai</option>
+    <option>North Sinai</option>
+    <option>Port Said</option>
+    <option>Suez</option>
+</select>
+
+      <h3>Payment Method</h3>
+
+    <label>
+  <input type="radio" name="payment" id="credit" checked>
+  Credit Card
+</label>
+
+<div id="credit-info">
+  <input type="text" placeholder="Card Number">
+  <input type="text" placeholder="Expiration Date (MM/YY)">
+  <input type="text" placeholder="Security Code">
+  <input type="text" placeholder="Name on Card">
+</div>
+
+<label>
+  <input type="radio" name="payment" id="cod">
+  Cash On Delivery
+</label>
+    
+
+
+       
+        <h3>Order Summary</h3>
+
+<div class="summary-box">
+    <div class="summary-row">
+        <span>Subtotal:</span>
+        <span id="subtotal">LE 0 EGP</span>
+    </div>
+
+    <div class="summary-row">
+        <span>Shipping:</span>
+        <span id="shipping">LE 0 EGP</span>
+    </div>
+
+    <div class="summary-row total-row">
+        <span>Total:</span>
+        <span id="total">LE 0 EGP</span>
+    </div>
+</div>
+
+        <button type="submit" class="btn">Complete Purchase</button>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+<div id="result"></div>
+
+<footer id="footer">
+    <div class="end">
+<img src="pics/letter-f_3665895.png" alt="FaceBook" width="50px">
+<img src="pics/instagram_2175271.png" alt="Instagram" width="50px">
+<img src="pics/tiktok_3741700.png" alt="TikTok" width="50px">
+    </div>
+    <br><br>
+  <span class="message">  &copy; 2025 Jewels. All rights reserved. </span>
+</footer>
+<script>
+function openMenu(){
+ const sidebar=document.querySelector('.sidebar');
+ sidebar.style.display='flex';
+}
+function closeMenu(){
+   const sidebar=document.querySelector('.sidebar');
+   sidebar.style.display='none';
+}
+function opencart(){
+    const cart=document.querySelector('.cart');
+    cart.style.visibility='visible';
+}
+function closecart(){
+    const cart=document.querySelector('.cart');
+    cart.style.visibility='hidden';
+}
+
+
+document.getElementById("checkoutForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const payment = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+   document.getElementById("cod").addEventListener("click", function() {
+    document.getElementById("credit-info").style.display = "none";
+});
+
+document.getElementById("credit").addEventListener("click", function() {
+    document.getElementById("credit-info").style.display = "block";
+});
+
+
+    document.getElementById("result").innerHTML =`
+        ✅ Thank you, ${name}! Your order has been placed using **${payment.toUpperCase()}**.`;
+});
+function updateTotal() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+    });
+
+    let shipping = subtotal === 0 ? 0 : 40;
+    let total = subtotal + shipping;
+
+    document.getElementById("subtotal").textContent = subtotal + " EGP";
+    document.getElementById("shipping").textContent = shipping + " EGP";
+    document.getElementById("total").textContent = total + " EGP";
+}
+
+
+
+updateTotal();
+document.getElementById("checkoutForm").addEventListener("submit", function(event) {
+event.preventDefault(); 
+
+document.getElementById("result").innerHTML =
+"<h2>✅ Thank you for ordering!</h2><p>Your order has been placed successfully.</p>";
+});
+</script>
+</body>
+</html>

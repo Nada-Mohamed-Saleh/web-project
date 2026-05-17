@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Earrings Collection</title>
+  <style>
+    :root {
+  --bg: #fafafa;
+  --card: #fff;
+  --accent: #ff5e78;
+}
+
+/** { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter, Arial, sans-serif';
+  background: var(--bg);
+  color:black;
+  
+    background-color:#f8f2e0; 
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+ header { text-align:center; padding:24px 0; 
+
+    background-color: white;  
+    color:#5C3A21;           
+    padding: 20px;            
+    text-align: center;       
+    font-size: 18px;          
+    font-family:'fantasy'
+}*/
+body{
+  background-color:  #f8f2e0;
+}
+#nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+}
+@font-face {
+    font-family:"MyFont" ;
+    src: url(PerfectoCalligraphy.ttf);
+}
+.nav-center{
+    font-size: 70px;
+    font-family:'MyFont';
+}
+.nav-left{
+    margin-left: 15px;
+}
+.nav-right{
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.product-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:40px;
+  padding: 0 24px 40px;
+  max-width:1100px;
+  margin: 200px auto;
+  padding: 20px;
+  text-align: center;
+  color:darkslategray;  
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0 24px 40px;
+  max-width: 1200px;
+  margin: 200px auto;
+}
+
+.product-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(12,12,12,0.06);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.product-card h3 {
+  margin: 8px 0 6px;
+  font-size: 1.05rem;
+}
+
+.price {
+  margin: 6px 0 12px;
+  font-weight: 600;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+button:hover { opacity: 0.95; }
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .product-grid { grid-template-columns: 1fr; padding: 0 12px; }
+  .product-card img { height: 200px; }
+}
+.message{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+#footer{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
+}
+.end{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-size: 20px;
+}
+.sidebar{
+position: fixed;
+margin-top: 0;
+top:0;
+left: 0;
+height: 100%;
+width: 250px;
+z-index: 999;
+background-color:whitesmoke;
+box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
+display: none;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+gap: 45px;
+font-size: 20px;
+list-style-type: none;
+cursor: pointer;
+border-radius: 10px;
+}
+.sidebar li{
+    width: 100%;
+
+}
+.sidebar a{
+    width: 100%;
+    color: black;
+    text-decoration: none;
+    font-weight: bolder;
+    font-family:'Garamond';
+    
+}
+.sidebar a:hover{
+ color:rgb(200, 161, 109);
+ font-size: 24px;
+}
+#cartcount{
+position:relative;
+top: -20px;
+right: 15px;
+background-color: wheat;
+color:black;
+padding: 2px 4px;
+border-radius: 50%;
+font-size: 15px;
+}
+.cart{
+position: fixed;
+top: 0;
+right: 0;
+width: 300px;
+height: 100%;
+background-color: whitesmoke;
+box-shadow:-10px 0 10px rgba(0, 0, 0, 0.2); 
+padding: 1rem;
+z-index: 999;
+border-radius: 2px;
+visibility: hidden;
+overflow-y: auto;
+}
+.cart-title{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ border-bottom:2px solid rgb(225, 218, 203);
+ padding-bottom:1rem;
+}
+.cart-title h3{
+ color: black;
+ font-family: garamond;
+ font-size: 30px;
+}
+.close-btn{
+    cursor: pointer;
+}
+.cart-total{
+font-weight: bolder;
+font-size: 25px;
+text-align: right;
+font-family: garamond;
+border-top: 2px solid rgb(225, 218, 203);
+padding-top: 1rem;
+margin-top: 1rem;
+}
+.checkout-button:hover{
+    opacity: 0.95;
+}
+.checkout-button{
+ padding: 8px 0;
+ background-color: #ff5e78;
+ color: whitesmoke;
+ text-align: center;
+ border-radius: 5px;
+ cursor: pointer;
+ margin-top: 8px;
+ font-size: 18px;
+ font-family: garamond;
+ font-weight: bolder;
+ text-decoration: none;
+ display: flex;
+ justify-content: center;
+ margin-bottom: 60px;
+}
+.trash-btn{
+ margin-left: 100px;
+cursor: pointer;
+
+}
+.q-btn{
+ background-color: #ff5e78;
+ cursor: pointer;
+ border: none;
+ padding: 5px 10px;
+ border-radius: 8px;
+ color: white;
+}
+.cart-item{
+list-style-type: none;
+}
+#searchBox{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 60px;
+background-color: whitesmoke;
+display: flex;
+align-items: center;
+padding: 20px;
+z-index: 999;
+box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
+visibility: hidden;
+}
+#searchInput{
+ border-radius: 50px;
+ height: 40px;
+ width: 350px;
+ margin: auto;
+}
+#close-search{
+ cursor: pointer;
+}
+  </style>
+</head>
+<body>
+<header id="nav">
+ <div class="nav-left">
+ <nav>
+  <ul class="sidebar">
+ <li onclick=closeMenu()><img src="pics/multiplication-sign_85711272.png" width="65"></li>
+ <li><a href="index.html">Home</a></li>
+ <li><a href="necklaces.html">Necklaces Collection</a></li>
+ <li><a href="bracelets.html">Bracelets Collection</a></li>
+ <li><a href="cardHolders.html">CardHolders Collection</a></li>
+ <li><a href="rings.html">Rings Collection</a></li>
+ <li><a href="earrings.html">Earrings Collection</a></li>
+ <li><a href="belts.html">Belts Collection</a></li>
+ <li><a href="login.html">Login</a></li>
+ </ul>
+</nav>
+<img onclick=openMenu() style="cursor: pointer;" src="pics/menu-bar_10080458.png" width="60"> 
+<img src="pics/search.png" width="60" style="cursor: pointer;"  onclick=openSearch()>
+<div id="searchBox">
+ <img src="pics/multiplication-sign_85711272.png" width="65" id="close-search" onclick=closeSearch()>
+ <input type="text" id="searchInput" placeholder="Search Your Product...">
+</div>
+ </div>
+ <div class="nav-center">Jewels</div>
+ <div class="nav-right">
+ <a href="login.html"><img src="pics/person_14362141.png" width="55"></a>
+ <img onclick=opencart() style="cursor: pointer;" src="pics/cart.png" width="64">
+ <span id="cartcount">0</span>
+ </div>
+ </header>
+ <div class="cart" id="cart">
+ <div class="cart-title">
+    <h3>My Cart</h3>
+    <img src="pics/multiplication-sign_85711272.png" width="65" class="close-btn"  onclick=closecart()>
+ </div>
+ <ul id="cart-items">
+
+ </ul>
+ <div class="cart-total">Total: LE <span id="total-price">0</span> EGP</div>
+ <div><a class="checkout-button" href="checkout.html"> Check Out</a></div>
+</div> 
+
+  <main>
+    <div id="product-grid" class="product-grid">
+      <div class="product-card">
+        <img src="pics/earrings1.jpg" alt="Loop Star Earrings">
+        <h3>Loop Star Earrings</h3>
+        <p class="price">LE 300 EGP</p>
+        <button onclick="addToCart('Lock Drop Necklace', 300);addedToCart('Loop Star Earrings',300,'pics/earrings1.jpg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="pics/earrings2.jpg" alt="Bow Earrings">
+        <h3>Bow Earrings</h3>
+        <p class="price">LE 300 EGP</p>
+        <button onclick="addToCart('Colored Choker', 300);addedToCart('Bow Earrings',300,'pics/earrings2.jpg')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="pics/earrings3.jpg" alt="Textured Bold Ear Cuff">
+        <h3>Textured Bold Ear Cuff</h3>
+        <p class="price">LE 600 EGP</p>
+        <button onclick="addToCart('Textured Bold Ear Cuff', 600);addedToCart('Textured Bold Ear Cuff',600,'pics/earrings3.jpg')">Add to Cart</button>
+      </div>
+    <div class="product-card">
+        <img src="pics/earrings4.jpg" alt="Plain Bold Ear Cuff">
+        <h3>Plain Bold Ear Cuff</h3>
+        <p class="price">LE 430 EGP</p>
+        <button onclick="addToCart('Plain Bold Ear Cuff', 430);addedToCart('Plain Bold Ear Cuff',430,'pics/earrings4.jpg')">Add to Cart</button>
+      </div>
+
+         <div class="product-card">
+        <img src="pics/earrings5.jpg" alt="Hoop Earrings">
+        <h3>Hoop Earrings</h3>
+        <p class="price">LE 300 EGP</p>
+        <button onclick="addToCart('Hoop Earrings', 300);addedToCart('Hoop Earrings',300,'pics/earrings5.jpg')">Add to Cart</button>
+      </div>
+
+       <div class="product-card">
+        <img src="pics/earrings6.jpg" alt="Volt Hoop Earrings">
+        <h3>Volt Hoop Earrings</h3>
+        <p class="price">LE 350 EGP</p>
+        <button onclick="addToCart('Volt Hoop Earrings', 350);addedToCart('Volt Hoop Earrings',350,'pics/earrings6.jpg')">Add to Cart</button>
+      </div>
+
+
+       <div class="product-card">
+        <img src="pics/earrings7.jpg" alt="Royal Blue Earrings">
+        <h3>Royal Blue Earrings</h3>
+        <p class="price">LE 500 EGP</p>
+        <button onclick="addToCart('Royal Blue Earrings', 500);addedToCart('Royal Blue Earrings',500,'pics/earrings7.jpg')">Add to Cart</button>
+      </div>
+
+ <div class="product-card">
+        <img src="pics/earrings8.jpg" alt="Bling Hoop Earrings">
+        <h3>Bling Hoop Earrings </h3>
+        <p class="price">LE 300 EGP</p>
+        <button onclick="addToCart('Bling Hoop Earrings', 300);addedToCart('Bling Hoop Earrings',300,'pics/earrings8.jpg')">Add to Cart</button>
+      </div>
+
+       <div class="product-card">
+        <img src="pics/earrings9.jpg" alt="Bold Hoop Earrings">
+        <h3>Bold Hoop Earrings</h3>
+        <p class="price">LE 500 EGP</p>
+        <button onclick="addToCart('Bold Hoop Earrings', 500);addedToCart('Bold Hoop Earrings',500,'pics/earrings9.jpg')">Add to Cart</button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="end">
+<img src="pics/letter-f_3665895.png" alt="FaceBook" width="50px">
+<img src="pics/instagram_2175271.png" alt="Instagram" width="50px">
+<img src="pics/tiktok_3741700.png" alt="TikTok" width="50px">
+    </div>
+    <br><br>
+  <span class="message">  &copy; 2025 Jewels. All rights reserved. </span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

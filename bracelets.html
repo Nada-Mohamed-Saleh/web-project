@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bracelets Collection</title>
+  <style>
+    :root {
+  --bg: #fafafa;
+  --card: #fff;
+  --accent: #ff5e78;
+}
+/*
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter, Arial, sans-serif';
+  background: var(--bg);
+  color:black;
+  
+    background-color:#f8f2e0; 
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+ header { text-align:center; padding:24px 0; 
+
+    background-color: white;  
+    color:#5C3A21;           
+    padding: 20px;            
+    text-align: center;       
+    font-size: 18px;          
+    font-family:'fantasy'
+}*/
+body{
+  background-color: #f8f2e0;
+}
+#nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+}
+@font-face {
+    font-family:"MyFont" ;
+    src: url(PerfectoCalligraphy.ttf);
+}
+.nav-center{
+    font-size: 70px;
+    font-family:'MyFont';
+}
+.nav-left{
+    margin-left: 15px;
+    
+}
+.nav-right{
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.product-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:40px;
+  padding: 0 24px 40px;
+  max-width:1100px;
+  margin: 200px auto;
+  padding: 20px;
+  text-align: center;
+  color:darkslategray;  
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0 24px 40px;
+  max-width: 1200px;
+  margin: 200px auto;
+}
+
+.product-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(12,12,12,0.06);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.product-card h3 {
+  margin: 8px 0 6px;
+  font-size: 1.05rem;
+}
+
+.price {
+  margin: 6px 0 12px;
+  font-weight: 600;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+button:hover { opacity: 0.95; }
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .product-grid { grid-template-columns: 1fr; padding: 0 12px; }
+  .product-card img { height: 200px; }
+}
+.message{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+#footer{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
+}
+.end{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-size: 20px;
+}
+.sidebar{
+position: fixed;
+margin-top: 0;
+top:0;
+left: 0;
+height: 100%;
+width: 250px;
+z-index: 999;
+background-color:whitesmoke;
+box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
+display: none;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+gap: 45px;
+font-size: 20px;
+list-style-type: none;
+cursor: pointer;
+border-radius: 10px;
+}
+.sidebar li{
+    width: 100%;
+
+}
+.sidebar a{
+    width: 100%;
+    color: black;
+    text-decoration: none;
+    font-weight: bolder;
+    font-family:'Garamond';
+    
+}
+.sidebar a:hover{
+ color:rgb(200, 161, 109);
+ font-size: 24px;
+}
+#cartcount{
+position:relative;
+top: -20px;
+right: 15px;
+background-color: wheat;
+color:black;
+padding: 2px 4px;
+border-radius: 50%;
+font-size: 15px;
+}
+.cart{
+position: fixed;
+top: 0;
+right: 0;
+width: 300px;
+height: 100%;
+background-color: whitesmoke;
+box-shadow:-10px 0 10px rgba(0, 0, 0, 0.2); 
+padding: 1rem;
+z-index: 999;
+border-radius: 2px;
+visibility: hidden;
+overflow-y: auto;
+}
+.cart-title{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ border-bottom:2px solid rgb(225, 218, 203);
+ padding-bottom:1rem;
+}
+.cart-title h3{
+ color: black;
+ font-family: garamond;
+ font-size: 30px;
+}
+.close-btn{
+    cursor: pointer;
+}
+.cart-total{
+font-weight: bolder;
+font-size: 25px;
+text-align: right;
+font-family: garamond;
+border-top: 2px solid rgb(225, 218, 203);
+padding-top: 1rem;
+margin-top: 1rem;
+}
+.checkout-button:hover{
+    opacity: 0.95;
+}
+.checkout-button{
+ padding: 8px 0;
+ background-color: #ff5e78;
+ color: whitesmoke;
+ text-align: center;
+ border-radius: 5px;
+ cursor: pointer;
+ margin-top: 8px;
+ font-size: 18px;
+ font-family: garamond;
+ font-weight: bolder;
+ text-decoration: none;
+ display: flex;
+ justify-content: center;
+ margin-bottom: 60px;
+}
+.trash-btn{
+ margin-left: 100px;
+cursor: pointer;
+
+}
+.q-btn{
+ background-color: #ff5e78;
+ cursor: pointer;
+ border: none;
+ padding: 5px 10px;
+ border-radius: 8px;
+ color: white;
+}
+.cart-item{
+list-style-type: none;
+}
+#searchBox{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 60px;
+background-color: whitesmoke;
+display: flex;
+align-items: center;
+padding: 20px;
+z-index: 999;
+box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
+visibility: hidden;
+}
+#searchInput{
+ border-radius: 50px;
+ height: 40px;
+ width: 350px;
+ margin: auto;
+}
+#close-search{
+ cursor: pointer;
+}
+  </style>
+</head>
+<body>
+  <header id="nav">
+ <div class="nav-left">
+ <nav>
+  <ul class="sidebar">
+ <li onclick=closeMenu()><img src="pics/multiplication-sign_85711272.png" width="65"></li>
+ <li><a href="index.html">Home</a></li>
+ <li><a href="necklaces.html">Necklaces Collection</a></li>
+ <li><a href="bracelets.html">Bracelets Collection</a></li>
+ <li><a href="cardHolders.html">CardHolders Collection</a></li>
+ <li><a href="rings.html">Rings Collection</a></li>
+ <li><a href="earrings.html">Earrings Collection</a></li>
+ <li><a href="belts.html">Belts Collection</a></li>
+ <li><a href="login.html">Login</a></li>
+ </ul>
+</nav>
+<img onclick=openMenu() style="cursor: pointer;" src="pics/menu-bar_10080458.png" width="60"> 
+<img src="pics/search.png" width="60" style="cursor: pointer;"  onclick=openSearch()>
+<div id="searchBox">
+ <img src="pics/multiplication-sign_85711272.png" width="65" id="close-search" onclick=closeSearch()>
+ <input type="text" id="searchInput" placeholder="Search Your Product...">
+</div>
+ </div>
+ <div class="nav-center">Jewels</div>
+ <div class="nav-right">
+ <a href="login.html"><img src="pics/person_14362141.png" width="55"></a>
+ <img onclick=opencart() style="cursor: pointer;" src="pics/cart.png" width="64">
+ <span id="cartcount">0</span>
+ </div>
+ </header>
+ <div class="cart" id="cart">
+ <div class="cart-title">
+    <h3>My Cart</h3>
+    <img src="pics/multiplication-sign_85711272.png" width="65" class="close-btn"  onclick=closecart()>
+ </div>
+ <ul id="cart-items">
+
+ </ul>
+ <div class="cart-total">Total: LE <span id="total-price">0</span> EGP</div>
+ <div><a class="checkout-button" href="checkout.html"> Check Out</a></div>
+</div>
+
+  <main>
+    <div id="product-grid" class="product-grid">
+      <div class="product-card">
+        <img src="pics/bracelet 1.png" alt="Rectangular Gold Tennis Bracelet">
+        <h3>Rectangular Gold Tennis Bracelet</h3>
+        <p class="price">LE 550 EGP</p>
+        <button onclick="addToCart('Rectangular Gold Tennis Bracelet',550 );addedToCart('Rectangular Gold Tennis Bracelet',550,'pics/bracelet 1.png')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="pics/bracelet 2.png" alt="Dezla Bracelet">
+        <h3>Dezla Bracelet</h3>
+        <p class="price">LE 650 EGP</p>
+        <button onclick="addToCart('Dezla Bracelet', 650);addedToCart('Dezla Bracelet',650,'pics/bracelet 2.png')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="pics/bracelet 3.png" alt="Diamond Silver Tennis Bracelet">
+        <h3>Diamond Silver Tennis Bracelet</h3>
+        <p class="price">LE 400 EGP</p>
+        <button onclick="addToCart('Diamond Silver Tennis Bracelet',400 );addedToCart('Diamond Silver Tennis Bracelet',400,'pics/bracelet 3.png')">Add to Cart</button>
+      </div>
+    <div class="product-card">
+        <img src="pics/bracelet 4.png" alt="Mini Stars Bracelet">
+        <h3>Mini Stars Bracelet</h3>
+        <p class="price">LE 350 EGP</p>
+        <button onclick="addToCart('Mini Stars Bracelet',350 );addedToCart('Mini Stars Bracelet',350,'pics/bracelet 4.png')">Add to Cart</button>
+      </div>
+
+         <div class="product-card">
+        <img src="pics/bracelet 5.png" alt="Diamond Double Layered Bracelet">
+        <h3>Diamond Double Layered Bracelet</h3>
+        <p class="price">LE 450 EGP</p>
+        <button onclick="addToCart('Diamond Double Layered Bracelet',450 );addedToCart('Diamond Double Layered Bracelet',450,'pics/bracelet 5.png')">Add to Cart</button>
+      </div>
+
+       <div class="product-card">
+        <img src="pics/bracelet 6.png" alt="Calira Gem Bracelet">
+        <h3>Calira Gem Bracelet</h3>
+        <p class="price">LE 800 EGP</p>
+        <button onclick="addToCart('Calira Gem Bracelet',800 );addedToCart('Calira Gem Bracelet',800,'pics/bracelet 6.png')">Add to Cart</button>
+      </div>
+
+
+       <div class="product-card">
+        <img src="pics/bracelet 7.png" alt="Delora Bracelet">
+        <h3>Delora Bracelet</h3>
+        <p class="price">LE 450 EGP</p>
+        <button onclick="addToCart('Delora Bracelet',450 );addedToCart('Delora Bracelet',450,'pics/bracelet 7.png')">Add to Cart</button>
+      </div>
+
+ <div class="product-card">
+        <img src="pics/bracelet 8.png" alt="Double Layered Tennis Bracelet">
+        <h3>Double Layered Tennis Bracelet</h3>
+        <p class="price">LE 450 EGP</p>
+        <button onclick="addToCart('Double Layered Tennis Bracelet',450 );addedToCart('Double Layered Tennis Bracelet',450,'pics/bracelet 8.png')">Add to Cart</button>
+      </div>
+
+       <div class="product-card">
+        <img src="pics/bracelet 9.png" alt="Thick Classic Bracelet">
+        <h3>Thick Classic Bracelet</h3>
+        <p class="price">LE 450 EGP</p>
+        <button onclick="addToCart('Thick Classic Bracelet',450 );addedToCart('Thick Classic Bracelet',450,'pics/bracelet 9.png')">Add to Cart</button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="end">
+<img src="pics/letter-f_3665895.png" alt="FaceBook" width="50px">
+<img src="pics/instagram_2175271.png" alt="Instagram" width="50px">
+<img src="pics/tiktok_3741700.png" alt="TikTok" width="50px">
+    </div>
+    <br><br>
+  <span class="message">  &copy; 2025 Jewels. All rights reserved. </span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
